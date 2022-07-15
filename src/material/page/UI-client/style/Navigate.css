@@ -1,0 +1,16 @@
+.navbar-design{
+    height: 100%;
+    width: 100%;
+    padding-top: 15px;
+}
+
+.navbar-design .me-auto a{
+    color: rgb(211, 202, 202);
+}
+
+.navbar-design .me-auto a:hover{
+    color: rgb(188, 43, 43);
+}
+.nav-link{
+    font-family: Arial, Helvetica, sans-serif;
+}

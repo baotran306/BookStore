@@ -1,0 +1,120 @@
+:root{
+    --primary-color:'#0e48fe';
+    --primary-hover:'#29e6a7';
+    --primary-dark:'#039d69';
+    --gray100:'#f9fbff';
+    --gray150:'#f4f6fb';
+    --gray200:'#eef1f6';
+    --gray300:'#e1e5ee';
+    --gray400:'#767b91';
+    --gray500:'#4f546c';
+    --gray600:'#2a324b';
+    --gray700:'#161d34';
+}
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #4f546c;
+    background-color: rgb(245,255,250);
+}
+*,
+*::before
+,*::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.wrapper-item{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    justify-content: flex-start;
+}
+.slick-arrow.slick-prev::before,.slick-arrow.slick-next::before{
+    content: none; 
+}
+.slick-arrow.slick-prev{
+    height: 34px;
+    line-height: 34px;
+    width: 34px;
+    padding-left: 10px;
+    margin: 0;
+    background: #e6e6e6;
+    color: #fff;
+    opacity: 0.6;
+    position: absolute;
+    top: calc(50% - 17px);
+    border-radius: 3px;
+    justify-content: center;
+}
+.slick-arrow.slick-next{
+    height: 34px;
+    line-height: 34px;
+    width: 34px;
+    padding: 0px;
+    margin: 0;
+    background: #e6e6e6;
+    color: #fff;
+    opacity: 0.5;
+    position: absolute;
+    top: calc(50% - 17px);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.slick-slider{
+    border-radius: 5px;
+}
+.design-title{
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    overflow: hidden;
+    padding: 15px 0px;
+    font-size: 22px;
+    line-height: 36px;
+    color: #333;
+    text-transform: uppercase;
+}
+.container{
+    margin-bottom: 20px;
+}
+.clearfix{
+    position: relative;
+    left: 0px;
+}
+.design{
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-right: 0;
+}
+.new{
+    background-color: rgba(51, 197, 246, 0.868);
+}
+.seller{
+    background-color: #FED201;
+}
+.btn-seeMore{
+    padding-top: 20px;
+    text-align: center;
+}
+.btn-seeMore .btn{
+    width: 300px;
+}
+.btn-seeMore .btn-primary{
+    background-color: #fff;
+    color: black;
+    border-color: #fff;
+}
+.btn-seeMore .btn-primary:hover{
+    border-color: rgb(255, 188, 107);
+    background-color: rgb(255, 188, 107);
+}
+
+.btn-seeMore.btn-primary:hover{
+    background-color: #fff;
+}

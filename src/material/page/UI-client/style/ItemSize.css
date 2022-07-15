@@ -1,0 +1,17 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card{
+    height: auto;
+    cursor: pointer;
+}
+.card.select{
+    border-color: rgb(240, 126, 44);
+}
+.card label{
+    cursor: pointer;
+}
+.card label span{
+    font-weight: 50;
+    cursor: pointer;
+}

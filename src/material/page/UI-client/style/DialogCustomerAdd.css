@@ -1,0 +1,21 @@
+#btn-add:hover{
+    background-color: #0e46feef;
+    color: white;
+}
+#customized-dialog-title{
+    text-align: start;
+}
+.price{
+    color: #f30c28;
+    margin-right: 15px;
+}
+.price::after,.priceDiscount::after{
+    content: 'đ';
+}
+.priceDiscount{
+    text-decoration: line-through;
+    color: gray;
+}
+.title{
+    font-family:Arial, Helvetica, sans-serif;
+}
