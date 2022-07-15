@@ -7,7 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 const SearchScreen = () => {
     const [books, setBooks] = useState([]);
     const { bookName } = useParams();
-    // alert(bookName);
+    // alert(bookName) ;
     const getBooks = () => {
         Axios.post(`/book/get-list-book-by-name`, {
             bookName: bookName
