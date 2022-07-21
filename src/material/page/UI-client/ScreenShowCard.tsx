@@ -30,7 +30,7 @@ function SamplePrevArrow(props: any) {
     ><ArrowBackIos style={{ fontSize: '24px', color: 'black' }} /></div>
   );
 };
-const ScreenCard = () => {
+const ScreenCard = (props: any) => {
   const [books, setBooks] = useState([]);
   const [newBooks, setNewBooks] = useState([]);
   const [bestSellerBooks, setBestSellerBooks] = useState([]);
@@ -101,6 +101,7 @@ const ScreenCard = () => {
               percent_discount: b.percent_discount,
               tag: "b.tag",
               tag_label: "b.label.tag_label",
+
             };
           }))
       }).catch(error => {
@@ -131,7 +132,7 @@ const ScreenCard = () => {
             {newBooks.map((b: any) =>
             (<CardItem
               key={b.isbn}
-              img={require('../../image/' + b.img)}
+              img={b.img}
               title={b.title}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
@@ -139,6 +140,7 @@ const ScreenCard = () => {
               isbn={b.isbn}
               tag={b.tag}
               tag_label={b.tag_label}
+              handleClick={props.handleClick}
             />))}
           </Slider>
           <div className='btn-seeMore'>
@@ -163,7 +165,7 @@ const ScreenCard = () => {
             {bestSellerBooks.map((b: any) => //b.percent_discount ?
             (<CardItem
               key={b.isbn}
-              img={require('../../image/' + b.img)}
+              img={b.img}
               title={b.title}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
@@ -171,6 +173,7 @@ const ScreenCard = () => {
               isbn={b.isbn}
               tag={b.tag}
               tag_label={b.tag_label}
+              handleClick={props.handleClick}
             />))}
           </Slider>
           <div className='btn-seeMore'>
@@ -186,7 +189,7 @@ const ScreenCard = () => {
           {books.map((b: any) => (
             <CardItem
               key={b.isbn}
-              img={require('../../image/' + b.img)}
+              img={b.img}
               title={b.title}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
@@ -194,6 +197,7 @@ const ScreenCard = () => {
               isbn={b.isbn}
               tag={b.tag}
               tag_label={b.tag_label}
+              handleClick={props.handleClick}
             />
           ))}
         </div>

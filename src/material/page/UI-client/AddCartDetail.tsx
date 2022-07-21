@@ -6,12 +6,24 @@ import './style/AddCartDetail.css'
 import ItemColor from './ItemColor';
 import ItemSize from './ItemSize'
 const AddCartDetail = (props: any) => {
+    const [books, setBooks] = useState('' as any);
     const [quantity, setQuantity] = useState(1);
-
+    useEffect(() => {
+        props.setShoppingCart({ ...props.shoppingCart, quantity: quantity });
+    }, [quantity]);
+    useEffect(() => {
+        Axios.get(`/book/get-list-book-by-id/${props.isbn}`)
+            .then((res) => {
+                let booksTemp = res.data[0];
+                setBooks(booksTemp);
+            }).catch((e) => {
+                console.log(e);
+            })
+    }, [])
     const handleIncrease = () => {
         setQuantity(() => {
             if (quantity !== 0) {
-                if (false) {
+                if (books.quantity_in_stock < quantity + 1) {
                     return quantity;
                 } else {
                     return quantity + 1;
@@ -33,7 +45,7 @@ const AddCartDetail = (props: any) => {
         <Container>
             <Row>
                 <div className='img-container'>
-                    <img src={require('../../image/clothing.png')} />
+                    <img src={`http://127.0.0.1:5000/get-image/${books.image}`} />
                 </div>
             </Row>
             <Row>

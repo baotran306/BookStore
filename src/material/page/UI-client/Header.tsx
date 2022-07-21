@@ -5,7 +5,7 @@ import './style/Header.css'
 import NavigateBar from './NavigateBar'
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = (props: any) => {
     return (
         <div className="content">
             <Row>
@@ -15,7 +15,7 @@ const Header = () => {
                         <img className="logo" src={logo} alt='logo' style={{ cursor: 'pointer' }} />
                     </Link>
                 </Col>
-                <Col xl={10}><div className="navigateBar"><NavigateBar /></div></Col>
+                <Col xl={10}><div className="navigateBar"><NavigateBar size={props.size} cart={props.cart} /></div></Col>
             </Row>
         </div>
     )

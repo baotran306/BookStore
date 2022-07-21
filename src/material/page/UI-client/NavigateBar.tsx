@@ -10,14 +10,14 @@ import CustomizedDialogs from "./CustomDialog";
 
 
 
-const Navigate = () => {
+const Navigate = (props: any) => {
     const redirect = useNavigate();
     const [showSearch, setShowSearch] = useState(false);
     const [showUser, setShowUser] = useState(false);
     const [valueSearch, setValueSearch] = useState('');
     const handleEnterPress = (e: any) => {
         if (e.key === 'Enter') {
-            redirect(`search/${valueSearch}`);
+            redirect(`search/${valueSearch.replace(/\s\s+/g, ' ').trim()}`);
         }
     }
     return (
@@ -52,7 +52,14 @@ const Navigate = () => {
                         </Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} onClick={() => { setShowUser(true) }}><FaUser /></Nav.Link>
                         <CustomizedDialogs open={showUser} setOpen={setShowUser} title={'Login'}>Hey</CustomizedDialogs>
-                        <Nav.Link style={{ paddingTop: '0px' }} href="#pricing"><FaShoppingCart /></Nav.Link>
+                        <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">
+                            <div className="containerCart">
+                                <FaShoppingCart />
+                                {props.size > 0 ?
+                                    <div className="iconCount">
+                                        <span>{props.size}</span>
+                                    </div> : <></>}
+                            </div></Nav.Link>
                     </Nav>
                 </Col>
             </Row>

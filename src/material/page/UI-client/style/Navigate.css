@@ -14,3 +14,19 @@
 .nav-link{
     font-family: Arial, Helvetica, sans-serif;
 }
+.containerCart{
+    position: relative;
+}
+.iconCount{
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+    padding-right: 1px;
+    text-align: center;
+    position: absolute;
+    top: -2px;
+    right: -8px;
+}

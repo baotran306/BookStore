@@ -54,6 +54,15 @@ export default function CustomizedDialogs(props: any) {
     const handleClose = () => {
         props.setOpen(false);
     };
+    const handleAdd = () => {
+        props.shoppingCart.afterDiscountPrice = parseInt(props.price_discount ? props.price_discount : props.price_current);
+        props.shoppingCart.beforeDiscountPrice = parseFloat(props.price_current);
+        props.shoppingCart.name = props.title;
+        props.shoppingCart.isbn = props.isbn;
+        props.shoppingCart.img = props.img;
+        props.handleClick(props.shoppingCart);
+        props.setOpen(false);
+    }
 
     return (
         <div>
@@ -67,10 +76,10 @@ export default function CustomizedDialogs(props: any) {
                     <Row>
                         <Col>
                             <span className='price'>
-                                {props.price_discount}
+                                {new Intl.NumberFormat().format(props.price_discount ? props.price_discount : props.price_current)}
                             </span>
-                            {props.price_current ? <span className='priceDiscount'>
-                                {props.price_current}
+                            {props.price_discount ? <span className='priceDiscount'>
+                                {new Intl.NumberFormat().format(props.price_current)}
                             </span> : null}
                         </Col>
                     </Row>
@@ -81,7 +90,7 @@ export default function CustomizedDialogs(props: any) {
                     </Typography>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'center' }}>
-                    <Button id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleClose}>
+                    <Button id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleAdd}>
                         ADD
                     </Button>
                 </DialogActions>
