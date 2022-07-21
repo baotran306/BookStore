@@ -86,3 +86,17 @@ def staff_login(account, password):
     except Exception as ex:
         print(ex)
         return []
+
+
+def get_staff_info_by_account(account):
+    try:
+        cursor.execute("select * from get_staff_info_by_account(?)", account)
+        ans = []
+        for r in cursor:
+            ans.append({'customer_id': r[0], 'last_name': r[1], 'first_name': r[2], 'gender': r[3], 'address': r[4],
+                        'date_of_birth': r[5], 'phone_number': r[6], 'email': r[7], 'account': r[8]})
+        cursor.commit()
+        return ans
+    except Exception as ex:
+        print(ex)
+        return []

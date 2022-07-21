@@ -63,6 +63,26 @@ def get_list_book_by_id(book_id):
         return jsonify([])
 
 
+@app.route("/customer/get-customer-info-by-account/<string:account>", methods=['GET'])
+def get_customer_info_by_account(account):
+    try:
+        customer_info = customer_function.get_customer_info_by_account(account)
+        return jsonify(customer_info)
+    except Exception as ex:
+        print(ex)
+        return jsonify([])
+
+
+@app.route("/staff/get-staff-info-by-account/<string:account>", methods=['GET'])
+def get_staff_info_by_account(account):
+    try:
+        staff_info = staff_function.get_staff_info_by_account(account)
+        return jsonify(staff_info)
+    except Exception as ex:
+        print(ex)
+        return jsonify([])
+
+
 @app.route("/admin/insert-department", methods=['POST'])
 def insert_department():
     try:
