@@ -1,0 +1,96 @@
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#cartDetailContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+#cartDetailContainer .cart-main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+#cartDetailContainer .cart-top{
+    display: flex;
+    justify-content: center;
+}
+#cartDetailContainer .cart-bottom {
+    display: flex;
+    justify-content: center;
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+}
+#cartDetailContainer .cart-bottom .navBarBottom{
+    height: 50px;
+    width: 800px;
+    display: flex;
+    border: 1px solid rgba(0,0,0,.125);
+    background-color: white;
+}
+#cartDetailContainer .navBarCartDetail{
+    margin-top: 20px;
+    width: 800px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(0,0,0,.125);
+}
+#cartDetailContainer .navBarCartDetail .nav-item{
+    width: 100%;
+    padding:0 10px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+#cartDetailContainer .navBarCartDetail .nav-item .css-j204z7-MuiFormControlLabel-root{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+#cartDetailContainer .navBarCartDetail .nav-item .delete-item-select{
+    color: red;
+}
+#cartDetailContainer .navBarCartDetail .nav-item .delete-item-select:hover{
+    text-decoration: underline;
+}
+
+#cartDetailContainer .cart-bottom .navBarBottom .detail{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+#cartDetailContainer .cart-bottom .navBarBottom .detail .detail-center{
+    display: flex;
+    justify-content: flex-start;
+    height: 35px;
+}
+
+#cartDetailContainer .cart-bottom .navBarBottom .btn{
+    display: flex;
+    width: 20%;
+    height: 100%;
+    justify-content: center;
+}
+#cartDetailContainer .cart-bottom .navBarBottom .detail .detail-center p{
+    font-size: 16px;
+    text-align: center;
+}
+#cartDetailContainer .cart-bottom .navBarBottom .detail .detail-center span{
+    padding-left: 10px;
+    color: #f30c28;
+    font-size: 24px;
+    text-align: center;
+}
+#cartDetailContainer .cart-bottom .navBarBottom .detail .detail-center span::after{
+    content: 'đ';
+}
+

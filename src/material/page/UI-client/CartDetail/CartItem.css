@@ -1,0 +1,113 @@
+#cart-card-item{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 800px;
+    height: 150px;
+    justify-content: center;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 0px;
+}
+#cart-card-item .left{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+#cart-card-item .center{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    border-right: 0.5px solid rgba(228, 223, 223, 0.481);
+}
+#cart-card-item .right{
+    flex: 6;
+    flex-direction: column;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-evenly;
+    -webkit-justify-content: space-around;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    padding: 0px 20px 0px 20px ;
+}
+#cart-card-item .center .top{
+    flex: 6;
+    height: 80%;
+    width: 100%;
+    display: inline-block;
+}
+#cart-card-item .center .top img{
+    padding-top: 3px;
+    object-fit: contain;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+#cart-card-item .center .bottom{
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 5px 10px;
+    height: 20%;
+}
+#cart-card-item .center .bottom .priceAfterDiscount span{
+    color: #f30c28;
+}
+#cart-card-item .center .bottom .priceAfterDiscount span::after{
+    content: 'đ';
+}
+
+#cart-card-item .center .bottom .priceBeforeDiscount span{
+    color: #bebebe;
+    text-decoration: line-through;
+}
+#cart-card-item .center .bottom .priceBeforeDiscount span::after{
+    content: 'đ';
+}
+
+#cart-card-item .right .title{
+    width: 400px;
+    height: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#cart-card-item .right .title span{
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 20px;
+}
+
+#cart-card-item .right .quantity{
+    display: flex;
+    gap: 10px;
+}
+#cart-card-item .right .quantity-container{
+    margin-top: 0px;
+}
+
+#cart-card-item .right .btn-item{
+    position: relative;
+    width: 100%;
+    height: 40px;
+}
+
+#cart-card-item .right .total{
+    margin-top: 5px;
+    display: flex;
+}
+#cart-card-item .right .total span{
+    padding-left: 10px;
+    color: #f30c28;
+}
+#cart-card-item .right .total span::after{
+    content: 'đ';
+}
