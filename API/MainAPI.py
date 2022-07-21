@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
+import paypalrestsdk
 import DatabaseConnection.BookFunction
 import DatabaseConnection.StaffFunction
 import DatabaseConnection.CustomerFunction
@@ -7,6 +8,12 @@ import DatabaseConnection.CustomerFunction
 book_function = DatabaseConnection.BookFunction
 staff_function = DatabaseConnection.StaffFunction
 customer_function = DatabaseConnection.CustomerFunction
+
+
+paypalrestsdk.configure({
+  "mode": "sandbox",  # sandbox or live
+  "client_id": "AbHXLZ77N0PJo1CAspFIU157G1n8KFF7V-ZlIEgKCAM_IcMnL1zMjLXHtIBVp8Rpinyth5URxONj-LHx",
+  "client_secret": "EH6mu9MBgKogt2yOVrfvyCRGT13oeKtYGln-5GI00lhGw879ZkDp0zw-pyVjxCQcDYxU_KzIAQJ_3Sim"})
 
 
 app = Flask(__name__)
@@ -40,6 +47,16 @@ def get_list_book_by_name():
     try:
         book_name = request.json['bookName']
         list_book = book_function.get_list_book_by_name(book_name)
+        return jsonify(list_book)
+    except Exception as ex:
+        print(ex)
+        return jsonify([])
+
+
+@app.route("/book/get-list-book-by-id/<string:book_id>", methods=['GET'])
+def get_list_book_by_id(book_id):
+    try:
+        list_book = book_function.get_list_book_by_id(book_id)
         return jsonify(list_book)
     except Exception as ex:
         print(ex)
@@ -145,7 +162,7 @@ def customer_login():
 
 
 @app.route("/customer/order", methods=['POST'])
-def insert_customer():
+def insert_order_customer():
     try:
         l_name = request.json['lName']
         f_name = request.json['fName']
@@ -200,6 +217,39 @@ def insert_author():
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra'})
+
+
+@app.route("/payment", methods=['POST'])
+def payment():
+    payment1 = paypalrestsdk.Payment({
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"},
+        "redirect_urls": {
+            "return_url": "http://localhost:3000/payment/execute",
+            "cancel_url": "http://localhost:3000/"},
+        "transactions": [{
+            "item_list": {
+                "items": [{
+                    "name": "testitem",
+                    "sku": "12345",
+                    "price": "500.00",
+                    "currency": "USD",
+                    "quantity": 1}]},
+            "amount": {
+                "total": "500.00",
+                "currency": "USD"},
+            "description": "This is the payment transaction description."}]})
+    if payment1.create():
+        print('payment success')
+    else:
+        print('payment fail')
+    return jsonify({'paymentID': payment.id})
+
+
+@app.route("/get-image/<string:id_image>", methods=['GET'])
+def get_image(id_image):
+    return send_file("D:\\CODE\\PTITHCM_BookStore\\back_end\\Image\\{}".format(id_image), mimetype='image/gif')
 
 
 if __name__ == "__main__":

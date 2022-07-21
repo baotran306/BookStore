@@ -100,3 +100,18 @@ def get_list_book_by_name(name):
     except Exception as ex:
         print(ex)
         return []
+
+
+def get_list_book_by_id(book_id):
+    try:
+        cursor.execute("select * from get_list_book_by_id(?)", book_id)
+        ans = []
+        for r in cursor:
+            ans.append({'isbn': r[0], 'book_name': r[1], 'image': r[2], 'pages': r[3], 'price': float(r[4]),
+                        'release_year': r[5], 'quantity_in_stock': r[6], 'is_new': r[7], 'book_type_name': r[10],
+                        'publisher_name': r[11], 'percent_discount': r[12]})
+        cursor.commit()
+        return ans
+    except Exception as ex:
+        print(ex)
+        return []

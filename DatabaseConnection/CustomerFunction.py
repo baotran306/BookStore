@@ -72,4 +72,4 @@ def customer_order(l_name, f_name, address, phone_num, email, customer_id, list_
 
 
 # print(customer_order('Nguyễn', 'Văn Long', '110 Chương Dương, Thủ Đức', '0987271333', 'nvl1682@gmail.com',
-#                      'CUSTOMER_2', [['978-604-2-27347-3', 64000, 1]]))
+#                      'CUSTOMER_2', [['978-604-2-27206-3', 160000, 8], ['978-604-2-26314-6', 124000, 2]]))
