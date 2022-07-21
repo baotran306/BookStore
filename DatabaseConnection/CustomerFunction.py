@@ -71,5 +71,19 @@ def customer_order(l_name, f_name, address, phone_num, email, customer_id, list_
         return False
 
 
+def get_customer_info_by_account(account):
+    try:
+        cursor.execute("select * from get_customer_info_by_account(?)", account)
+        ans = []
+        for r in cursor:
+            ans.append({'customer_id': r[0], 'last_name': r[1], 'first_name': r[2], 'gender': r[3], 'address': r[4],
+                        'date_of_birth': r[5], 'phone_number': r[6], 'email': r[7], 'tax': r[8], 'account': r[9]})
+        cursor.commit()
+        return ans
+    except Exception as ex:
+        print(ex)
+        return []
+
+
 # print(customer_order('Nguyễn', 'Văn Long', '110 Chương Dương, Thủ Đức', '0987271333', 'nvl1682@gmail.com',
 #                      'CUSTOMER_2', [['978-604-2-27206-3', 160000, 8], ['978-604-2-26314-6', 124000, 2]]))
