@@ -4,7 +4,7 @@ import CardItem from './CardItem';
 import Axios from '../../Axios';
 import './style/ScreenCard.css';
 import { Link, useParams } from 'react-router-dom';
-const SearchScreen = () => {
+const SearchScreen = (props: any) => {
     const [books, setBooks] = useState([]);
     const { bookName } = useParams();
     // alert(bookName) ;
@@ -52,6 +52,7 @@ const SearchScreen = () => {
                         is_new={b.is_new}
                         isbn={b.isbn}
                         tag={b.tag}
+                        handleClick={props.handleClick}
                         tag_label={b.tag_label}
                     />
                 ))}
