@@ -13,17 +13,20 @@ const CartDetail = () => {
     const [selectAll, setSelectAll] = useState(false);
     useEffect(() => {
         let cartTemp = localStorage.getItem('cart');
-        setCartItems(JSON.parse(cartTemp!).map((data: any) => {
-            return {
-                isbn: data.isbn,
-                afterDiscountPrice: data.afterDiscountPrice,
-                beforeDiscountPrice: data.beforeDiscountPrice,
-                name: data.name,
-                quantity: data.quantity,
-                img: data.img,
-                select: false,
-            }
-        }));
+        if (cartTemp !== null) {
+            setCartItems(JSON.parse(cartTemp!).map((data: any) => {
+                return {
+                    isbn: data.isbn,
+                    afterDiscountPrice: data.afterDiscountPrice,
+                    beforeDiscountPrice: data.beforeDiscountPrice,
+                    name: data.name,
+                    quantity: data.quantity,
+                    image: data.image,
+                    select: false,
+                }
+            }));
+        }
+
     }, [])
     const handleSelectItem = (item: any) => {
         setCartItems(cartItems.map((data: any) => {
@@ -83,9 +86,9 @@ const CartDetail = () => {
         setCartItems(cartItems.filter((data: any) => data.isbn !== item.isbn));
         setProductIsChoose(productIsChoose > 0 ? productIsChoose - 1 : productIsChoose);
     }
-    const handleBuy = ()=>{
+    const handleBuy = () => {
         let arr = [] as any;
-        arr = cartItems.filter((data:any)=>data.select===true);
+        arr = cartItems.filter((data: any) => data.select === true);
         alert(arr);
     }
     return (

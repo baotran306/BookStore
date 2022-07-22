@@ -12,7 +12,7 @@ interface CartTP {
     beforeDiscountPrice: '',
     isbn: ''
     quantity: '',
-    img: ''
+    image: ''
 };
 const MainPage = () => {
     const [cart, setCart] = useState<CartTP[]>([])

@@ -55,7 +55,7 @@ const ItemColor = (props: any) => {
     return (
         <div className="container-item-color">
             <div className={`card ${props.isCheck ? 'is-select' : ''}`}>
-                <img src={props.img} className="card-img" />
+                <img src={props.image} className="card-img" />
                 <div className="card-color">
                     <label>{props.color}</label>
                 </div>

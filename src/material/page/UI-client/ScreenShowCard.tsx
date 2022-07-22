@@ -46,7 +46,7 @@ const ScreenCard = (props: any) => {
           listProduct.map((b: any) => {
             return {
               isbn: b.isbn,
-              img: b.image,
+              image: b.image,
               title: b.book_name,
               price_current: b.price,
               is_new: b.is_new,
@@ -71,7 +71,7 @@ const ScreenCard = (props: any) => {
           listProduct.map((b: any) => {
             return {
               isbn: b.isbn,
-              img: b.image,
+              image: b.image,
               title: b.book_name,
               price_current: b.price,
               is_new: b.is_new,
@@ -94,7 +94,7 @@ const ScreenCard = (props: any) => {
           listProduct.map((b: any) => {
             return {
               isbn: b.isbn,
-              img: b.image,
+              image: b.image,
               title: b.book_name,
               price_current: b.price,
               is_new: b.is_new,
@@ -132,7 +132,7 @@ const ScreenCard = (props: any) => {
             {newBooks.map((b: any) =>
             (<CardItem
               key={b.isbn}
-              img={b.img}
+              image={b.image}
               title={b.title}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
@@ -165,7 +165,7 @@ const ScreenCard = (props: any) => {
             {bestSellerBooks.map((b: any) => //b.percent_discount ?
             (<CardItem
               key={b.isbn}
-              img={b.img}
+              image={b.image}
               title={b.title}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
@@ -189,7 +189,7 @@ const ScreenCard = (props: any) => {
           {books.map((b: any) => (
             <CardItem
               key={b.isbn}
-              img={b.img}
+              image={b.image}
               title={b.title}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}

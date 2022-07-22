@@ -59,7 +59,7 @@ export default function CustomizedDialogs(props: any) {
         props.shoppingCart.beforeDiscountPrice = parseFloat(props.price_current);
         props.shoppingCart.name = props.title;
         props.shoppingCart.isbn = props.isbn;
-        props.shoppingCart.img = props.img;
+        props.shoppingCart.image = props.image;
         props.handleClick(props.shoppingCart);
         props.setOpen(false);
     }

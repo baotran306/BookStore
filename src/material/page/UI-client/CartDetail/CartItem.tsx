@@ -44,7 +44,7 @@ const CartItem = (props: any) => {
             </div>
             <div className="center">
                 <div className="top">
-                    <img src={`http://127.0.0.1:5000/get-image/${props.item.img}`} />
+                    <img src={`http://127.0.0.1:5000/get-image/${props.item.image}`} />
                 </div>
                 <div className="bottom">
                     <div className="priceAfterDiscount"><span>{new Intl.NumberFormat().format(props.item.afterDiscountPrice)}</span></div>

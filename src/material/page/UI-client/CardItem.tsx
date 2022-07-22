@@ -10,7 +10,7 @@ interface cart {
     beforeDiscountPrice: '',
     isbn: '',
     quantity: '',
-    img: ''
+    image: ''
 };
 const Card = (props: any) => {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Card = (props: any) => {
     }
     return (
         <div className="card-item" title={props.title}>
-            <img src={`http://127.0.0.1:5000/get-image/${props.img}`} className="card__img" />
+            <img src={`http://127.0.0.1:5000/get-image/${props.image}`} className="card__img" />
             <div className="card__body">
                 <div className="card__title" >
                     <span onClick={() => { navigate(`/shop/${props.tag_label}/${props.tag}`) }}>{props.title}</span>
@@ -43,7 +43,7 @@ const Card = (props: any) => {
             </div> : null}
             <CustomizedDialogs open={openDialogCart}
                 isbn={props.isbn}
-                img={props.img}
+                image={props.image}
                 shoppingCart={shoppingCart}
                 setOpen={setOpenDialogCart}
                 handleClick={props.handleClick}
