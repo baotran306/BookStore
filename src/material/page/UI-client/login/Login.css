@@ -1,0 +1,32 @@
+.login-wrapper{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.login-wrapper input{
+    width: 330px;
+}
+.login-wrapper .password{
+    position: relative;
+}
+.login-wrapper .bottom-login{
+    display: flex;
+    justify-content: space-between;
+}
+.login-wrapper .bottom-login span{
+    color: #05a;
+}
+.login-wrapper .bottom-login span:hover{
+    cursor: pointer;
+    color: red;
+    text-decoration: underline;
+}
+.icon-password{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

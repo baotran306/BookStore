@@ -7,7 +7,10 @@
 .navbar-design .me-auto a{
     color: rgb(211, 202, 202);
 }
-
+.navbar-design .me-auto{
+    display: flex;
+    position: relative;
+}
 .navbar-design .me-auto a:hover{
     color: rgb(188, 43, 43);
 }

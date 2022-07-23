@@ -6,8 +6,9 @@ import { ExpandMore, Search } from '@mui/icons-material'
 import { Row, Col, Container, Form } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import './style/Navigate.css'
-import CustomizedDialogs from "./CustomDialog";
-
+import LoginDialog from './login/LoginDialog'
+import { Avatar } from "@mui/material";
+import DropDownUser from "./dropdown/DropDownUser";
 
 
 const Navigate = (props: any) => {
@@ -50,16 +51,19 @@ const Navigate = (props: any) => {
                         }} title='search'>
                             <Search />
                         </Nav.Link>
-                        <Nav.Link style={{ paddingTop: '0px' }} onClick={() => { setShowUser(true) }}><FaUser /></Nav.Link>
-                        <CustomizedDialogs open={showUser} setOpen={setShowUser} title={'Login'}>Hey</CustomizedDialogs>
-                        <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">
+                        <Nav.Link style={{ paddingTop: '0px' }} onClick={() => redirect('/cart')}>
                             <div className="containerCart">
                                 <FaShoppingCart />
                                 {props.size > 0 ?
                                     <div className="iconCount">
                                         <span>{props.size}</span>
                                     </div> : <></>}
-                            </div></Nav.Link>
+                            </div>
+                        </Nav.Link>
+                        {props.accessToken === null ?
+                            <Nav.Link style={{ paddingTop: '0px' }} onClick={() => { setShowUser(true) }}><FaUser /></Nav.Link>
+                            : <Nav.Link style={{ position: 'absolute', right: '60px', top: '-15px' }}><DropDownUser setAccessToken={props.setAccessToken} /></Nav.Link>}
+                        <LoginDialog open={showUser} setOpen={setShowUser} title={'Login'} setAccessToken={props.setAccessToken} />
                     </Nav>
                 </Col>
             </Row>

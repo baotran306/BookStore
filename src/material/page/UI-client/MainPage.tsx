@@ -6,6 +6,7 @@ import NavigateHeader from './Header';
 import ScreenCard from './ScreenShowCard';
 import SearchScreen from './SearchScreen';
 import CartDetail from './CartDetail/CartDetail';
+import CompleteOrder from './ReceiverInfo';
 interface CartTP {
     name: '',
     afterDiscountPrice: '',
@@ -16,6 +17,7 @@ interface CartTP {
 };
 const MainPage = () => {
     const [cart, setCart] = useState<CartTP[]>([])
+    const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
 
     useEffect(() => {
         if (cart.length !== 0) {
@@ -43,7 +45,7 @@ const MainPage = () => {
     return (
         <div className="main">
             <div>
-                <NavigateHeader size={cart.length} cart={cart} />
+                <NavigateHeader size={cart.length} cart={cart} accessToken={accessToken} setAccessToken={setAccessToken} />
             </div>
             <Container fluid style={{ paddingTop: '80px' }}>
                 <Row>
@@ -51,7 +53,8 @@ const MainPage = () => {
                         <Route path='/shop/:tag_label/:tag' element={<Error />} />
                         <Route path='/search/:bookName' element={<SearchScreen handleClick={handleClick} />} />
                         <Route path='/' element={<ScreenCard handleClick={handleClick} />} />
-                        <Route path='/cart' element={<CartDetail />} />
+                        <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} accessToken={accessToken} />} />
+                        <Route path='/cart/edit-receiver-information' element={<CompleteOrder />} />
                     </Routes>
                 </Row>
             </Container>
