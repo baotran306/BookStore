@@ -46,7 +46,8 @@ def customer_login(account, password):
         cursor.execute("select * from customer_login(?, ?)", account, helper.hash_password(password))
         ans = []
         for r in cursor:
-            ans.append({'customer_id': r[0], 'last_name': r[1], 'first_name': r[2], 'role_id': r[3], 'role_name': r[4]})
+            ans.append({'customer_id': r[0], 'last_name': r[1], 'first_name': r[2], 'address': r[3],
+                        'phone_number': r[4], 'email': r[5], 'role_id': r[6], 'role_name': r[7]})
         cursor.commit()
         return ans
     except Exception as ex:
@@ -87,3 +88,5 @@ def get_customer_info_by_account(account):
 
 # print(customer_order('Nguyễn', 'Văn Long', '110 Chương Dương, Thủ Đức', '0987271333', 'nvl1682@gmail.com',
 #                      'CUSTOMER_2', [['978-604-2-27206-3', 160000, 8], ['978-604-2-26314-6', 124000, 2]]))
+# print(customer_order('Nguyễn', 'Quoc Thang', '110 Chương Dương, HCM', '0987271334', 'nvl1682@gmail.com1',
+#                      'CUSTOMER_2', [['978-604-2-27206-3', 128000, 1], ['978-604-2-27347-3', 64000, 5]]))
