@@ -3,6 +3,11 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#nav-noti{
+    font-size: 1.125rem;
+    color: #ee4d2d;
+}
+
 #cartDetailContainer{
     display: flex;
     flex-direction: column;
@@ -42,6 +47,27 @@ body{
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid rgba(0,0,0,.125);
+}
+#cartDetailContainer .navBarCartInfo{
+    margin-top: 20px;
+    width: 800px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(0,0,0,.125);
+}
+#cartDetailContainer .navBarCartInfo .nav-item{
+    width: 100%;
+    padding:0 10px 0px 10px;
+    display: flex;
+    color: #05a;
+    justify-content: space-between;
+}
+#cartDetailContainer .navBarCartInfo .nav-noti{
+    color: #ee4d2d;
+    padding:0 10px 0px 10px;
+    justify-content: space-between;
 }
 #cartDetailContainer .navBarCartDetail .nav-item{
     width: 100%;
