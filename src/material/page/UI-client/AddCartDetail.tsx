@@ -24,6 +24,7 @@ const AddCartDetail = (props: any) => {
         setQuantity(() => {
             if (quantity !== 0) {
                 if (books.quantity_in_stock < quantity + 1) {
+                    alert(`${books.book_name} chỉ còn ${books.quantity_in_stock} quyển trong kho`)
                     return quantity;
                 } else {
                     return quantity + 1;
