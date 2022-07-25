@@ -86,8 +86,8 @@ def get_staff_info_by_account(account):
 @app.route("/admin/insert-department", methods=['POST'])
 def insert_department():
     try:
-        department_id = request.json['departmentId']
-        department_name = request.json['departmentName']
+        department_id = request.json['department_id']
+        department_name = request.json['department_name']
         if staff_function.insert_department(department_id, department_name):
             return jsonify({'result': True, 'message': 'Thêm phòng ban thành công'})
         return jsonify({'result': False, 'message': 'Thêm phòng ban thất bại'}), 502
@@ -99,7 +99,7 @@ def insert_department():
 @app.route("/admin/insert-role", methods=['POST'])
 def insert_role():
     try:
-        role_name = request.json['roleName']
+        role_name = request.json['role_name']
         if staff_function.insert_role(role_name):
             return jsonify({'result': True, 'message': 'Thêm quyền thành công'})
         return jsonify({'result': False, 'message': 'Thêm quyền thất bại'}), 502
@@ -111,17 +111,17 @@ def insert_role():
 @app.route("/admin/insert-staff", methods=['POST'])
 def insert_staff():
     try:
-        l_name = request.json['lName']
-        f_name = request.json['fName']
+        l_name = request.json['last_name']
+        f_name = request.json['first_name']
         gender = request.json['gender']
         address = request.json['address']
-        date_of_birth = request.json['dateOfBirth']
-        phone_num = request.json['phoneNumber']
+        date_of_birth = request.json['date_of_birth']
+        phone_num = request.json['phone_number']
         email = request.json['email']
         account = request.json['account']
         password = request.json['password']
-        department_id = request.json['departmentId']
-        role_id = request.json['roleId']
+        department_id = request.json['department_id']
+        role_id = request.json['role_id']
         if staff_function.insert_staff(l_name, f_name, gender, address, date_of_birth, phone_num, email, account,
                                        password, department_id, role_id):
             return jsonify({'result': True, 'message': 'Thêm nhân viên thành công'})
@@ -148,12 +148,12 @@ def staff_login():
 @app.route("/customer/register", methods=['POST'])
 def insert_customer():
     try:
-        l_name = request.json['lName']
-        f_name = request.json['fName']
+        l_name = request.json['last_name']
+        f_name = request.json['first_name']
         gender = request.json['gender']
         address = request.json['address']
-        date_of_birth = request.json['dateOfBirth']
-        phone_num = request.json['phoneNumber']
+        date_of_birth = request.json['date_of_birth']
+        phone_num = request.json['phone_number']
         email = request.json['email']
         tax = request.json['tax']
         account = request.json['account']
@@ -206,14 +206,14 @@ def insert_order_customer():
 def insert_book():
     try:
         isbn = request.json['isbn']
-        book_name = request.json['bookName']
+        book_name = request.json['book_name']
         image = request.json['image']
         pages = request.json['pages']
         price = request.json['price']
-        release_year = request.json['releaseYear']
+        release_year = request.json['release_year']
         quantity = request.json['quantity']
-        book_type_id = request.json['bookTypeId']
-        publisher_id = request.json['publisherId']
+        book_type_id = request.json['book_type_id']
+        publisher_id = request.json['publisher_id']
         if book_function.insert_book(isbn, book_name, image, pages, price, release_year, quantity,
                                      book_type_id, publisher_id):
             return jsonify({'result': True, 'message': 'Thêm sách thành công'})
@@ -226,12 +226,12 @@ def insert_book():
 @app.route("/book/insert-author", methods=['POST'])
 def insert_author():
     try:
-        author_id = request.json['authorId']
-        l_name = request.json['lName']
-        f_name = request.json['fName']
+        author_id = request.json['author_id']
+        l_name = request.json['last_name']
+        f_name = request.json['first_name']
         gender = request.json['gender']
-        date_of_birth = request.json['dateOfBirth']
-        phone_number = request.json['phoneNumber']
+        date_of_birth = request.json['date_of_birth']
+        phone_number = request.json['phone_number']
         address = request.json['address']
         email = request.json['email']
         if book_function.insert_author(author_id, l_name, f_name, gender, date_of_birth, phone_number, address, email):
