@@ -63,14 +63,44 @@ def get_list_book_by_id(book_id):
         return jsonify([]), 500
 
 
-@app.route("/customer/get-customer-info-by-account/<string:account>", methods=['GET'])
-def get_customer_info_by_account(account):
+@app.route("/book/insert-book", methods=['POST'])
+def insert_book():
     try:
-        customer_info = customer_function.get_customer_info_by_account(account)
-        return jsonify(customer_info)
+        isbn = request.json['isbn']
+        book_name = request.json['book_name']
+        image = request.json['image']
+        pages = request.json['pages']
+        price = request.json['price']
+        release_year = request.json['release_year']
+        quantity = request.json['quantity']
+        book_type_id = request.json['book_type_id']
+        publisher_id = request.json['publisher_id']
+        if book_function.insert_book(isbn, book_name, image, pages, price, release_year, quantity,
+                                     book_type_id, publisher_id):
+            return jsonify({'result': True, 'message': 'Thêm sách thành công'})
+        return jsonify({'result': False, 'message': 'Thêm sách thất bại'}), 502
     except Exception as ex:
         print(ex)
-        return jsonify([]), 500
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/book/insert-author", methods=['POST'])
+def insert_author():
+    try:
+        author_id = request.json['author_id']
+        l_name = request.json['last_name']
+        f_name = request.json['first_name']
+        gender = request.json['gender']
+        date_of_birth = request.json['date_of_birth']
+        phone_number = request.json['phone_number']
+        address = request.json['address']
+        email = request.json['email']
+        if book_function.insert_author(author_id, l_name, f_name, gender, date_of_birth, phone_number, address, email):
+            return jsonify({'result': True, 'message': 'Thêm sách thành công'})
+        return jsonify({'result': False, 'message': 'Thêm sách thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
 
 
 @app.route("/staff/get-staff-info-by-account/<string:account>", methods=['GET'])
@@ -81,6 +111,86 @@ def get_staff_info_by_account(account):
     except Exception as ex:
         print(ex)
         return jsonify([]), 500
+
+
+@app.route("/staff/get-customer-order", methods=['GET'])
+def get_list_customer_order_detail():
+    try:
+        order_customer = staff_function.get_list_customer_order_detail()
+        return jsonify(order_customer)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
+@app.route("/staff/get-list-count-delivery-staff", methods=['GET'])
+def get_list_count_delivery_staff():
+    try:
+        staff_count_delivery = staff_function.get_list_count_delivery_staff()
+        return jsonify(staff_count_delivery)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
+@app.route("/staff/update-delivery_success/<int:cart_id>", methods=['GET'])
+def update_delivery_success(cart_id):
+    try:
+        if staff_function.update_delivery_success(cart_id):
+            return jsonify({'result': True, 'message': 'Giao hàng thành công'})
+        return jsonify({'result': False, 'message': 'Cập nhật giao hàng thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/staff/update-cart", methods=['POST'])
+def staff_update_cart():
+    try:
+        cart_id = request.json['cart_id']
+        status = request.json['status_id']
+        staff_id_confirm = request.json['staff_id_confirm']
+        staff_id_delivery = request.json['staff_id_delivery']
+        if staff_function.staff_update_cart(cart_id, status, staff_id_confirm, staff_id_delivery):
+            return jsonify({'result': True, 'message': 'Giao hàng thành công'})
+        return jsonify({'result': False, 'message': 'Cập nhật giao hàng thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/staff/login", methods=['POST'])
+def staff_login():
+    try:
+        account = request.json['account']
+        password = request.json['password']
+        staff_info = staff_function.staff_login(account, password)
+        if len(staff_info) != 0:
+            return jsonify({'result': True, 'message': 'Đăng nhập thành công', 'info': staff_info})
+        return jsonify({'result': True, 'message': 'Sai tên đăng nhập hoặc mật khẩu', 'info': []}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': True, 'message': 'Có lỗi xảy ra', 'info': []}), 500
+
+
+@app.route("/staff/insert-exchange-rate", methods=['POST'])
+def insert_exchange_rate():
+    try:
+        exchange_value = request.json['exchange_value']
+        staff_id = request.json['staff_id']
+        if staff_function.insert_exchange_rate(exchange_value, staff_id):
+            return jsonify({'result': True, 'message': 'Thêm tỷ giá thành công'}), 200
+        return jsonify({'result': False, 'message': 'Thêm tỷ giá thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/staff/get-newest-exchange", methods=['GET'])
+def get_newest_exchange():
+    newest_exchange = staff_function.get_newest_exchange()
+    print(newest_exchange)
+    return jsonify(newest_exchange)
 
 
 @app.route("/admin/insert-department", methods=['POST'])
@@ -131,18 +241,16 @@ def insert_staff():
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
 
 
-@app.route("/staff/login", methods=['POST'])
-def staff_login():
+@app.route("/admin/statistic-sales-by-month", methods=['POST'])
+def statistic_sales_by_month():
     try:
-        account = request.json['account']
-        password = request.json['password']
-        staff_info = staff_function.staff_login(account, password)
-        if len(staff_info) != 0:
-            return jsonify({'result': True, 'message': 'Đăng nhập thành công', 'info': staff_info})
-        return jsonify({'result': True, 'message': 'Sai tên đăng nhập hoặc mật khẩu', 'info': []}), 502
+        from_date = request.json['from_date']
+        to_date = request.json['to_date']
+        data = staff_function.statistic_sales_by_month(from_date, to_date)
+        return jsonify({'result': True, 'message': 'In thống kê doanh thu thành công', 'info': data}), 200
     except Exception as ex:
         print(ex)
-        return jsonify({'result': True, 'message': 'Có lỗi xảy ra', 'info': []}), 500
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra', 'info': []}), 500
 
 
 @app.route("/customer/register", methods=['POST'])
@@ -165,6 +273,16 @@ def insert_customer():
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/customer/get-history-order/<string:customer_id>", methods=['GET'])
+def get_history_order_customer(customer_id):
+    try:
+        history_order_customer = customer_function.get_list_cart_detail_by_customer(customer_id)
+        return jsonify(history_order_customer)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
 
 
 @app.route("/customer/login", methods=['POST'])
@@ -202,44 +320,14 @@ def insert_order_customer():
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
 
 
-@app.route("/book/insert-book", methods=['POST'])
-def insert_book():
+@app.route("/customer/get-customer-info-by-account/<string:account>", methods=['GET'])
+def get_customer_info_by_account(account):
     try:
-        isbn = request.json['isbn']
-        book_name = request.json['book_name']
-        image = request.json['image']
-        pages = request.json['pages']
-        price = request.json['price']
-        release_year = request.json['release_year']
-        quantity = request.json['quantity']
-        book_type_id = request.json['book_type_id']
-        publisher_id = request.json['publisher_id']
-        if book_function.insert_book(isbn, book_name, image, pages, price, release_year, quantity,
-                                     book_type_id, publisher_id):
-            return jsonify({'result': True, 'message': 'Thêm sách thành công'})
-        return jsonify({'result': False, 'message': 'Thêm sách thất bại'}), 502
+        customer_info = customer_function.get_customer_info_by_account(account)
+        return jsonify(customer_info)
     except Exception as ex:
         print(ex)
-        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
-
-
-@app.route("/book/insert-author", methods=['POST'])
-def insert_author():
-    try:
-        author_id = request.json['author_id']
-        l_name = request.json['last_name']
-        f_name = request.json['first_name']
-        gender = request.json['gender']
-        date_of_birth = request.json['date_of_birth']
-        phone_number = request.json['phone_number']
-        address = request.json['address']
-        email = request.json['email']
-        if book_function.insert_author(author_id, l_name, f_name, gender, date_of_birth, phone_number, address, email):
-            return jsonify({'result': True, 'message': 'Thêm sách thành công'})
-        return jsonify({'result': False, 'message': 'Thêm sách thất bại'}), 502
-    except Exception as ex:
-        print(ex)
-        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+        return jsonify([]), 500
 
 
 @app.route("/payment", methods=['POST'])
