@@ -86,7 +86,35 @@ def get_customer_info_by_account(account):
         return []
 
 
+def get_list_cart_detail_by_customer(customer_id):
+    try:
+        cursor.execute("select * from get_list_cart_detail_by_customer(?) order by cart_id desc", customer_id)
+        ls_info = []
+        ls_item = []
+        for r in cursor:
+            ls_info.append({'cart_id': r[0], 'order_cart_time': r[6], 'status_id': r[7], 'status_name': r[8],
+                            'last_name': r[9], 'first_name': r[10],
+                            'address': r[11], 'phone_number': r[12], 'email': r[13]})
+            ls_item.append({'cart_id': r[0], 'isbn': r[1], 'book_name': r[2], 'image': r[3], 'quantity': r[4],
+                            'price': r[5]})
+        cursor.commit()
+        res = []
+        set_info = []
+        for value in ls_info:
+            if value['cart_id'] not in [tmp['cart_id'] for tmp in set_info]:
+                set_info.append(value)
+        for info in set_info:
+            tmp_list = list(filter(lambda customer_items: customer_items['cart_id'] == info['cart_id'], ls_item))
+            res.append({'receiver_info': info, 'list_item': tmp_list})
+        # print(res)
+        return res
+    except Exception as ex:
+        print(ex)
+        return []
+
+
 # print(customer_order('Nguyễn', 'Văn Long', '110 Chương Dương, Thủ Đức', '0987271333', 'nvl1682@gmail.com',
 #                      'CUSTOMER_2', [['978-604-2-27206-3', 160000, 8], ['978-604-2-26314-6', 124000, 2]]))
 # print(customer_order('Nguyễn', 'Quoc Thang', '110 Chương Dương, HCM', '0987271334', 'nvl1682@gmail.com1',
 #                      'CUSTOMER_2', [['978-604-2-27206-3', 128000, 1], ['978-604-2-27347-3', 64000, 5]]))
+# get_list_cart_detail_by_customer('CUSTOMER_2')
