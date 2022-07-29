@@ -7,6 +7,8 @@ import ScreenCard from './ScreenShowCard';
 import SearchScreen from './SearchScreen';
 import CartDetail from './CartDetail/CartDetail';
 import CompleteOrder from './ReceiverInfo';
+import DeliveryState from './delivery/DeliveryState';
+import DeliveryDetail from './delivery/DeliveryDetail';
 interface CartTP {
     name: '',
     afterDiscountPrice: '',
@@ -55,6 +57,8 @@ const MainPage = () => {
                         <Route path='/' element={<ScreenCard handleClick={handleClick} />} />
                         <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} accessToken={accessToken} />} />
                         <Route path='/cart/edit-receiver-information' element={<CompleteOrder />} />
+                        <Route path='/order/delivery-status' element={<DeliveryState />} />
+                        <Route path='/order/delivery-detail' element={<DeliveryDetail />} />
                     </Routes>
                 </Row>
             </Container>

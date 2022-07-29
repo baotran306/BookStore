@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { useNavigate } from "react-router-dom";
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
@@ -13,6 +14,7 @@ export default function DialogPayMent(props: any) {
     const theme = useTheme();
     const [paidFor, setPaidFor] = React.useState(false);
     const [error, setError] = React.useState(null);
+    const redirect = useNavigate();
 
     const handleApprove = (orderId: any) => {
         setPaidFor(true);
@@ -63,9 +65,11 @@ export default function DialogPayMent(props: any) {
                                     })
                                 }}
                                 onApprove={async (data: any, actions: any) => {
+                                    props.setCheckOut(true)
                                     const order = await actions.order.capture();
                                     console.log(order);
-                                    props.setCheckOut(true);
+                                    redirect(`/`);
+                                    alert('Đặt hàng thành công');
                                 }}
                                 onCancel={() => { }}
                                 onError={(err: any) => {

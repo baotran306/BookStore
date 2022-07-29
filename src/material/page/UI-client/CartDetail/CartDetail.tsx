@@ -58,9 +58,11 @@ const CartDetail = (props: any) => {
                     localStorage.removeItem('cart');
                 }
                 localStorage.removeItem('receiver');
+                // return 'true';
             }).catch(error => {
+                // alert(error);
                 console.log(error);
-
+                // return 'false';
             })
     }
     const handleSelectItem = (item: any) => {
@@ -119,6 +121,7 @@ const CartDetail = (props: any) => {
     }
     const handleRemove = (item: any) => {
         setCartItems(cartItems.filter((data: any) => data.isbn !== item.isbn));
+        // localStorage.setItem('cart', JSON.stringify(cartItems.filter((data: any) => data.isbn !== item.isbn)));
         setProductIsChoose(productIsChoose > 0 ? productIsChoose - 1 : productIsChoose);
     }
     const handleBuy = () => {
@@ -166,7 +169,7 @@ const CartDetail = (props: any) => {
                                 <FormControlLabel className="nav-noti-text" control={<LocationOn />} label={`Địa chỉ nhận hàng`} />
                             </div>
                             <div></div>
-                            <div className="nav-item">
+                            <div className="nav-item" title={receiver.last_name + " " + receiver.first_name + ", " + receiver.phone_number + ", " + receiver.address + ", " + receiver.email}>
                                 <div>
                                     <p>{receiver.last_name}{" "}{receiver.first_name}, {receiver.phone_number}, {receiver.address}, {receiver.email}</p>
                                 </div>
@@ -217,7 +220,7 @@ const CartDetail = (props: any) => {
                     </div>
                 </div>
             </div>
-        </Container>
+        </Container >
     )
 }
 export default CartDetail;

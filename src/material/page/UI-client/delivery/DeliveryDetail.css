@@ -1,0 +1,180 @@
+.delivery-detail{
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    gap: 20px;
+}
+
+.delivery-detail .header{
+    display: flex;
+    justify-content: center;
+}
+
+.delivery-detail .header .infor-customer{
+    width: 800px;
+    height: auto;
+    background-color: white;
+    padding: 15px 20px 15px 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+.delivery-detail .header .infor-customer .notify-state{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.delivery-detail .header .icon{
+    padding-right: 5px;
+}
+.delivery-detail .main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.delivery-detail .main .top{
+    display: flex;
+    justify-content: center;
+}
+.delivery-detail .main .top .navNar-detail{
+    display: flex;
+    background-color: white;
+    width: 800px;
+    height: 50px;
+    padding: 0px 10px 0 10px;
+    border-bottom: 0.5px solid rgb(216, 213, 213);
+    border-radius: 5px 5px 0 0;
+}
+.delivery-detail .main .top .navNar-detail .product-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    color: rgb(120, 120, 120);
+}
+.delivery-detail .main .top .navNar-detail .price-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    color: rgb(120, 120, 120);
+}
+.delivery-detail .main .top .navNar-detail .quantity-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15%;
+    color: rgb(120, 120, 120);
+}
+.delivery-detail .main .top .navNar-detail .total-temp-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 15%;
+    color: rgb(120, 120, 120);
+}
+.delivery-detail .main .center{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.delivery-detail .main .center .detail{
+    display: flex;
+    width: 800px;
+    height: auto;
+    background-color: white;
+    padding: 10px 10px 0px 10px;
+    border-bottom: 0.5px solid rgb(216, 213, 213);
+}
+.delivery-detail .main .center .detail:hover{
+    background-color:rgba(242, 248, 248, 0.747);
+}
+.delivery-detail .main .center .detail .product-detail{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+.delivery-detail .main .center .detail .product-detail .img-product-detail{
+    width: 100px;
+    height: 120px;
+}
+.delivery-detail .main .center .detail .product-detail .product{
+    width: 100%;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.delivery-detail .main .center .detail .product-detail .product .product-classification{
+    color: #0000008A;
+}
+.delivery-detail .main .center .detail .product-detail .img-product-detail img{
+    width: 80px;
+    height: 80px;
+}
+.delivery-detail .main .center .detail .price-detail{
+    width: 20%;
+}
+.delivery-detail .main .center .detail .price-detail span::after{
+    content: "đ";
+}
+
+.delivery-detail .main .center .detail .quantity-detail{
+    width: 15%;
+}
+
+.delivery-detail .main .center .detail .total-temp-detail{
+    width: 15%;
+}
+.delivery-detail .main .center .detail .total-temp-detail span::after{
+    content: "đ";
+}
+
+.delivery-detail .main .bottom{
+    display: flex;
+    justify-content: center;
+}
+.delivery-detail .main .end-line{
+    display: flex;
+    padding: 10px 10px 0px 10px;
+    width: 800px;
+    height: 50px;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+}
+.delivery-detail .main .total-title{
+    display: flex;
+    justify-content: right;
+    padding-top: 5px;
+    padding-right: 50px;
+    font-size: 18px;
+    width: 85%;
+    color: rgb(120, 120, 120);
+}
+.delivery-detail .main .total-price{
+    display: flex;
+    justify-content: right;
+    font-size: 22px;
+    color: rgb(255, 59, 39);
+    width: 15%;
+}
+.delivery-detail .main .total-price span::after{
+    content: "đ";
+}
+.delivery-detail .footer{
+    display: flex;
+    justify-content: center;
+}
+.delivery-detail .footer .link-back{
+    width: 800px;
+    height: 50px;
+    padding-left: 10px;
+}
+.delivery-detail .footer .link-back a{
+   color: rgb(11, 116, 229);
+   text-decoration: none;
+}
+.delivery-detail .footer .link-back a::before{
+    content: "<<";
+ }
+
+

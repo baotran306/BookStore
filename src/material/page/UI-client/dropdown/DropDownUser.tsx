@@ -6,15 +6,18 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import { ShoppingBasketOutlined, AccountCircleOutlined } from '@mui/icons-material'
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenu(props: any) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate();
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -78,6 +81,10 @@ export default function AccountMenu(props: any) {
                 <MenuItem>
                     <Avatar /> My account
                 </MenuItem>
+                <MenuItem onClick={() => { navigate('/order/delivery-status') }}>
+                    <ShoppingBasketOutlined sx={{ paddingRight: '5px', fontSize: '30px' }} /> My Order
+                </MenuItem>
+
                 <Divider />
                 <MenuItem>
                     <ListItemIcon>

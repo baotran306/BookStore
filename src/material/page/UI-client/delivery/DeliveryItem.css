@@ -1,0 +1,127 @@
+.container-delivery-card{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.card-deliver {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 180px;
+    background-color: white;
+    box-shadow: 0px 0px 1px 1px rgba(201, 189, 189, 0.821);
+    padding: 2px 24px 0px 24px;
+}
+.container-delivery-card .card-deliver .header{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.5px solid rgb(222, 215, 215);
+    justify-content: space-between;
+
+}
+.container-delivery-card .card-deliver .header .card-delivery-status .status{
+    font-size: 20px;
+    color: #ee4d2d;
+    padding-left: 5px;
+}
+.container-delivery-card .card-deliver .header .card-delivery-status .notify-status{
+    font-size: 16px;
+    color: #30b566;
+}
+.container-delivery-card .card-deliver .header .card-delivery-status{
+    display: flex;
+    justify-content: flex-end;
+}
+.container-delivery-card .card-deliver .main{
+    width: 100%;
+    height: 120px;
+    display: flex;
+}
+.container-delivery-card .card-deliver .items{
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+    gap: 10px;
+}
+.container-delivery-card .card-deliver .main .left{
+    display: flex;
+    justify-content: center;
+    width: 102px;
+    height: 112px;
+    border: 0.5px solid #333;
+}
+.container-delivery-card .card-deliver .main .left img{
+    width: 100px;
+    height: 110px;
+    object-fit: contain;
+}
+.container-delivery-card .card-deliver .main .right{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    height: 100%;
+    justify-content: space-between;
+}
+.container-delivery-card .card-deliver .main .right .price-before-discount{
+    text-decoration: line-through;
+    color: #bebebe;
+    padding-right: 5px;
+}
+.container-delivery-card .card-deliver .main .right .center-price{
+    display: flex;
+    justify-content: center;
+}
+.container-delivery-card .card-deliver .main .right .price-after-discount{
+    color: #f30c28;
+}
+.container-delivery-card .card-deliver .main .right span::after{
+    content: 'đ';
+}
+.container-delivery-card .card-deliver .main .center{
+    width: 100%;
+    height: 100%;
+    padding: 2px 0 0 10px;
+}
+.container-delivery-card .card-deliver .main .center .detail{
+    color: #0000008A;
+}
+.container-delivery-card .card-deliver .main .center .title{
+    line-height:22px;
+    font-size: 16px;
+}
+.card-deliver-footer{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    box-shadow: 0px 0px 1px 1px rgba(201, 189, 189, 0.821);
+    flex-direction: column;
+}
+.card-deliver-footer .right{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.card-deliver-footer .right .total{
+    display: flex;
+    justify-content: space-between;
+}
+.card-deliver-footer .right .total .price {
+    color: #ee4d2d;
+    font-size: 22px;
+}
+.card-deliver-footer .left {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    flex-direction: row;
+    gap: 10px;
+}
+.card-deliver-footer .left .MuiButton-root{
+    width: 200px;
+    border: 0.5px solid rgba(109, 107, 107, 0.811);
+}
