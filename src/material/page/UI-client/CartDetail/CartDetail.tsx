@@ -20,6 +20,7 @@ const CartDetail = (props: any) => {
     const [receiver, setReciever] = useState('' as any);
     const [openPayment, setOpenPayment] = useState(false);
     const [checkOut, setCheckOut] = useState(false);
+    const [exchangeValue, setExchangeValue] = useState(1);
     useEffect(() => {
         let cartTemp = localStorage.getItem('cart');
         if (cartTemp !== null) {
@@ -30,6 +31,7 @@ const CartDetail = (props: any) => {
                     beforeDiscountPrice: data.beforeDiscountPrice,
                     name: data.name,
                     quantity: data.quantity,
+                    quantity_current: data.quantity_current,
                     image: data.image,
                     select: false,
                 }
@@ -37,6 +39,15 @@ const CartDetail = (props: any) => {
         }
 
     }, [])
+    const getExchange = () => {
+        Axios.get(`/staff/get-newest-exchange`)
+            .then((res) => {
+                console.log("exchange: " + res.data[0].exchange_value);
+                setExchangeValue(res.data[0].exchange_value)
+            }).catch(error => {
+                console.log(error);
+            })
+    }
     const customerOrder = (carts: any) => {
         console.log("book: ", JSON.stringify(carts));
         Axios.post(`/customer/order`, {
@@ -128,6 +139,8 @@ const CartDetail = (props: any) => {
         if (localStorage.getItem('accessToken') === null) {
             setCheckLogin(true);
         } else {
+            getExchange();
+            // console.log('abc', exchangeValue);
             setOpenPayment(true);
         }
 

@@ -15,9 +15,11 @@ const CartItem = (props: any) => {
         });
     }
     const handleIncrease = () => {
+        // alert(props.item.quantity_current);
         setQuantity(() => {
             if (quantity !== 0) {
-                if (false) {
+                if (quantity + 1 > props.item.quantity_current) {
+                    alert('Quá số lượng')
                     return quantity;
                 } else {
                     return quantity + 1;

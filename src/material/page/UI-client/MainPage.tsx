@@ -15,6 +15,7 @@ interface CartTP {
     beforeDiscountPrice: '',
     isbn: ''
     quantity: '',
+    quantity_current: '',
     image: ''
 };
 const MainPage = () => {

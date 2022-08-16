@@ -9,6 +9,7 @@ interface cart {
     afterDiscountPrice: '',
     beforeDiscountPrice: '',
     isbn: '',
+    quantity_current: '',
     quantity: '',
     image: ''
 };
@@ -36,7 +37,7 @@ const Card = (props: any) => {
                 </div>
             </div>
             {props.is_new ? (<div className="circle-notify">
-                <span>NEW</span>
+                <span>Mới</span>
             </div>) : null}
             {props.percent_discount ? <div className="discount-notify">
                 <span>{props.percent_discount}</span>

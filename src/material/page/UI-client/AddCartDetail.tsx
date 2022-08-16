@@ -16,6 +16,8 @@ const AddCartDetail = (props: any) => {
             .then((res) => {
                 let booksTemp = res.data[0];
                 setBooks(booksTemp);
+                props.setShoppingCart({ ...props.shoppingCart, quantity_current: booksTemp.quantity_in_stock });
+
             }).catch((e) => {
                 console.log(e);
             })
