@@ -15,7 +15,7 @@ const Login = (props: any) => {
             <div className="login-wrapper">
                 <div className="username">
                     <FormControl error variant="standard" >
-                        <TextField label={"username"}
+                        <TextField label={"Tên đăng nhập"}
                             name={'username'}
                             value={props.user.username}
                             error={props.userMessageError !== '' ? true : false}
@@ -23,7 +23,7 @@ const Login = (props: any) => {
                     </FormControl>
                 </div>
                 <div className="password">
-                    <TextField label={'password'}
+                    <TextField label={'Mật khẩu'}
                         error={props.userMessageError !== '' ? true : false}
                         type={hiddenPassword ? 'password' : 'text'}
                         name={'password'} value={props.user.password} onChange={handleChange} />
@@ -36,8 +36,8 @@ const Login = (props: any) => {
                     </FormControl>
                 </div>
                 <div className="bottom-login">
-                    <div><span onClick={() => { props.setOpen(false) }}>Forget password</span></div>
-                    <div><span>Don't have an account?</span></div>
+                    <div><span onClick={() => { props.setOpen(false) }}>Quên mật khẩu</span></div>
+                    <div><span>Chưa có tài khoản?</span></div>
                 </div>
             </div>
         </div>

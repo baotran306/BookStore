@@ -10,7 +10,7 @@ const AddCartDetail = (props: any) => {
     const [quantity, setQuantity] = useState(1);
     useEffect(() => {
         props.setShoppingCart({ ...props.shoppingCart, quantity: quantity });
-    }, [quantity]);
+    }, [quantity, books]);
     useEffect(() => {
         Axios.get(`/book/get-list-book-by-id/${props.isbn}`)
             .then((res) => {

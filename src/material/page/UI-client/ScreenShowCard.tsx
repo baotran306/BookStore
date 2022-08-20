@@ -50,6 +50,7 @@ const ScreenCard = (props: any) => {
               title: b.book_name,
               price_current: b.price,
               is_new: b.is_new,
+              quantity_in_stock: b.quantity_in_stock,
               percent_discount: b.percent_discount,
               tag: "b.tag",
               tag_label: "b.label.tag_label",
@@ -75,6 +76,7 @@ const ScreenCard = (props: any) => {
               title: b.book_name,
               price_current: b.price,
               is_new: b.is_new,
+              quantity_in_stock: b.quantity_in_stock,
               percent_discount: b.percent_discount,
               tag: "b.tag",
               tag_label: "b.label.tag_label",
@@ -98,6 +100,7 @@ const ScreenCard = (props: any) => {
               title: b.book_name,
               price_current: b.price,
               is_new: b.is_new,
+              quantity_in_stock: b.quantity_in_stock,
               percent_discount: b.percent_discount,
               tag: "b.tag",
               tag_label: "b.label.tag_label",
@@ -134,6 +137,7 @@ const ScreenCard = (props: any) => {
               key={b.isbn}
               image={b.image}
               title={b.title}
+              quantity_in_stock={b.quantity_in_stock}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
               is_new={b.is_new}
@@ -167,6 +171,7 @@ const ScreenCard = (props: any) => {
               key={b.isbn}
               image={b.image}
               title={b.title}
+              quantity_in_stock={b.quantity_in_stock}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
               is_new={b.is_new}
@@ -191,6 +196,7 @@ const ScreenCard = (props: any) => {
               key={b.isbn}
               image={b.image}
               title={b.title}
+              quantity_in_stock={b.quantity_in_stock}
               percent_discount={b.percent_discount ? (b.percent_discount) : null}
               price_current={b.price_current}
               is_new={b.is_new}

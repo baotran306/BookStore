@@ -46,6 +46,7 @@ const Card = (props: any) => {
                 isbn={props.isbn}
                 image={props.image}
                 shoppingCart={shoppingCart}
+                quantity_in_stock={props.quantity_in_stock}
                 setOpen={setOpenDialogCart}
                 handleClick={props.handleClick}
                 price_discount={props.percent_discount ? (priceDiscount(props.price_current, props.percent_discount)) : null}

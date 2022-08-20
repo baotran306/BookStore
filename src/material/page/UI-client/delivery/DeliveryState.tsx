@@ -77,11 +77,11 @@ export default function CenteredTabs() {
             <div className='container-delivery-status'>
                 <div className='tablist'>
                     <Tabs className='tabs-delivery' sx={{ width: '100%' }} value={value} onChange={handleChange} centered>
-                        <Tab sx={{ width: '20%' }} label="All" />
-                        <Tab sx={{ width: '20%' }} label="Processing" />
-                        <Tab sx={{ width: '20%' }} label="Delivering" />
-                        <Tab sx={{ width: '20%' }} label="Finishing" />
-                        <Tab sx={{ width: '20%' }} label="Canceling" />
+                        <Tab sx={{ width: '20%' }} label="Tất cả" />
+                        <Tab sx={{ width: '20%' }} label="Chờ duyệt" />
+                        <Tab sx={{ width: '20%' }} label="Đang giao" />
+                        <Tab sx={{ width: '20%' }} label="Đã giao" />
+                        <Tab sx={{ width: '20%' }} label="Hủy" />
                     </Tabs>
                 </div>
                 <div className='tab-details'>

@@ -76,13 +76,10 @@ export default function AccountMenu(props: any) {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem>
-                    <Avatar /> Profile
-                </MenuItem>
-                <MenuItem>
-                    <Avatar /> My account
+                    <Avatar /> Trang cá nhân
                 </MenuItem>
                 <MenuItem onClick={() => { navigate('/order/delivery-status') }}>
-                    <ShoppingBasketOutlined sx={{ paddingRight: '5px', fontSize: '30px' }} /> My Order
+                    <ShoppingBasketOutlined sx={{ paddingRight: '5px', fontSize: '30px' }} /> Đơn hàng
                 </MenuItem>
 
                 <Divider />
@@ -90,7 +87,7 @@ export default function AccountMenu(props: any) {
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
-                    Settings
+                    Cài đặt
                 </MenuItem>
                 <MenuItem onClick={() => {
                     localStorage.removeItem('accessToken');
@@ -99,7 +96,7 @@ export default function AccountMenu(props: any) {
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
-                    Logout
+                    Đăng xuất
                 </MenuItem>
             </Menu>
         </React.Fragment>

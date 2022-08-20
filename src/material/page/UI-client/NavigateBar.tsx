@@ -29,7 +29,7 @@ const Navigate = (props: any) => {
                         <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/'}>TRANG CHỦ</Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/error'}>THỂ LOẠI</Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">TÁC GIẢ<ExpandMore /></Nav.Link>
-                        <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">LABEL <ExpandMore /></Nav.Link>
+                        {/* <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">LABEL <ExpandMore /></Nav.Link> */}
                     </Nav>
                 </Col>
                 <Col xl={3} style={{ position: 'relative' }}>
@@ -63,7 +63,7 @@ const Navigate = (props: any) => {
                         {props.accessToken === null ?
                             <Nav.Link style={{ paddingTop: '0px' }} onClick={() => { setShowUser(true) }}><FaUser /></Nav.Link>
                             : <Nav.Link style={{ position: 'absolute', right: '60px', top: '-15px' }}><DropDownUser setAccessToken={props.setAccessToken} /></Nav.Link>}
-                        <LoginDialog open={showUser} setOpen={setShowUser} title={'Login'} setAccessToken={props.setAccessToken} />
+                        <LoginDialog open={showUser} setOpen={setShowUser} title={'Đăng nhập'} setAccessToken={props.setAccessToken} />
                     </Nav>
                 </Col>
             </Row>

@@ -23,6 +23,7 @@ const SearchScreen = (props: any) => {
                             title: b.book_name,
                             price_current: b.price,
                             is_new: b.is_new,
+                            quantity_in_stock: b.quantity_in_stock,
                             percent_discount: b.percent_discount,
                             tag: "b.tag",
                             tag_label: "b.label.tag_label",
@@ -53,6 +54,7 @@ const SearchScreen = (props: any) => {
                         isbn={b.isbn}
                         tag={b.tag}
                         handleClick={props.handleClick}
+                        quantity_in_stock={b.quantity_in_stock}
                         tag_label={b.tag_label}
                     />
                 ))}

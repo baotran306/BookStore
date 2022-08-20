@@ -61,12 +61,12 @@ const CartDetail = (props: any) => {
         })
             .then((res) => {
                 const listProduct = res.data;
-                console.log("book: " + res.data.length);
                 if (carts.length < cartItems.length) {
-                    localStorage.setItem('cart', JSON.stringify(cartItems.filter((data: any) => data.select === false)));
+                    props.setCart(cartItems.filter((data: any) => data.select === false));
                 }
                 else {
                     localStorage.removeItem('cart');
+                    props.setCart([]);
                 }
                 localStorage.removeItem('receiver');
                 // return 'true';
@@ -132,7 +132,7 @@ const CartDetail = (props: any) => {
     }
     const handleRemove = (item: any) => {
         setCartItems(cartItems.filter((data: any) => data.isbn !== item.isbn));
-        // localStorage.setItem('cart', JSON.stringify(cartItems.filter((data: any) => data.isbn !== item.isbn)));
+        props.setCart(cartItems.filter((data: any) => data.isbn !== item.isbn));
         setProductIsChoose(productIsChoose > 0 ? productIsChoose - 1 : productIsChoose);
     }
     const handleBuy = () => {

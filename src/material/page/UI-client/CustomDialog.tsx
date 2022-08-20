@@ -90,8 +90,8 @@ export default function CustomizedDialogs(props: any) {
                     </Typography>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'center' }}>
-                    <Button id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleAdd}>
-                        ADD
+                    <Button disabled={props.quantity_in_stock === 0 ? true : false} id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleAdd}>
+                        Thêm
                     </Button>
                 </DialogActions>
             </BootstrapDialog>

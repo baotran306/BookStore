@@ -56,7 +56,7 @@ const MainPage = () => {
                         <Route path='/shop/:tag_label/:tag' element={<Error />} />
                         <Route path='/search/:bookName' element={<SearchScreen handleClick={handleClick} />} />
                         <Route path='/' element={<ScreenCard handleClick={handleClick} />} />
-                        <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} accessToken={accessToken} />} />
+                        <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} accessToken={accessToken} setCart={setCart} />} />
                         <Route path='/cart/edit-receiver-information' element={<CompleteOrder />} />
                         <Route path='/order/delivery-status' element={<DeliveryState />} />
                         <Route path='/order/delivery-detail' element={<DeliveryDetail />} />

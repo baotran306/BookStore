@@ -48,7 +48,7 @@ export default function LoginDialog(props: any) {
         let flagError = false;
         if (user.username === '' || user.password === '') {
             flagError = true;
-            setUserMessageError('Password or username is incorrect!')
+            setUserMessageError('Chưa nhập tên đăng nhập hoặc mật khảu!')
         }
         if (!flagError) {
             setUserMessageError('');
@@ -74,7 +74,7 @@ export default function LoginDialog(props: any) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions style={{ display: 'flex', justifyContent: 'center', height: '90px' }}>
-                    <Button style={{ width: '80%', padding: '10px 0 10px 0' }} variant="contained" onClick={handleClick}>LOGIN</Button>
+                    <Button style={{ width: '80%', padding: '10px 0 10px 0' }} variant="contained" onClick={handleClick}>Đăng nhập</Button>
                 </DialogActions>
             </Dialog>
         </div>
