@@ -195,8 +195,8 @@ const CartDetail = (props: any) => {
                     <div className="navBarCartDetail">
                         <div></div>
                         <div className="nav-item">
-                            <FormControlLabel control={<BpCheckbox checked={selectAll} onChange={handleChangeSelectAll} />} label={'Select all'} />
-                            {productIsChoose > 0 ? <FormControlLabel className="delete-item-select" control={<Delete />} label={`Remove ${productIsChoose} items`} /> : <></>}
+                            <FormControlLabel control={<BpCheckbox checked={selectAll} onChange={handleChangeSelectAll} />} label={'Chọn tất cả'} />
+                            {productIsChoose > 0 ? <FormControlLabel className="delete-item-select" control={<Delete />} label={`Xóa ${productIsChoose} đầu sách`} /> : <></>}
                         </div>
                         <div></div>
                     </div>
@@ -219,7 +219,7 @@ const CartDetail = (props: any) => {
                             <div></div>
                             <div className="detail-center">
                                 <div>
-                                    <p>Total price {`(${productIsChoose} products): `}<span>{new Intl.NumberFormat().format(total)}</span></p>
+                                    <p>Tổng hóa đơn {`(${productIsChoose} đầu sách): `}<span>{new Intl.NumberFormat().format(total)}</span></p>
                                 </div>
 
                             </div>

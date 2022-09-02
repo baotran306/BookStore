@@ -69,7 +69,7 @@ const CartItem = (props: any) => {
                         onClick={handleIncrease}><Add /></label>
                 </div>
                 <div className="total">
-                    <p>Total: </p>
+                    <p>Tổng tiền: </p>
                     <span>{new Intl.NumberFormat().format(quantity * props.item.afterDiscountPrice)}</span>
                 </div>
                 <div className="btn-item">
