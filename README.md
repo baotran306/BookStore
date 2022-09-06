@@ -1,6 +1,10 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Run command line to install npm
+## npm install  
+## npm install react-scripts --save
+## npm audit fix --force
 
 ## Available Scripts
 
@@ -44,3 +48,15 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Install Library support
+npm install @progress/kendo-react-pdf
+npm install jspdf
+npm install html2canvas
+npm install react-scripts
+npm install react-report-builder
+npm install @paypal/react-paypal-js
+npm install  json-server  
+npm install --save date-fns 
+npm install  @mui/x-date-pickers  
+npm install @mui/x-date-pickers/DatePicker
