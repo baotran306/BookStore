@@ -50,13 +50,13 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Install Library support
-npm install @progress/kendo-react-pdf
-npm install jspdf
-npm install html2canvas
-npm install react-scripts
-npm install react-report-builder
-npm install @paypal/react-paypal-js
-npm install  json-server  
-npm install --save date-fns 
-npm install  @mui/x-date-pickers  
-npm install @mui/x-date-pickers/DatePicker
+## npm install @progress/kendo-react-pdf
+## npm install jspdf
+## npm install html2canvas
+## npm install react-scripts
+## npm install react-report-builder
+## npm install @paypal/react-paypal-js
+## npm install  json-server  
+## npm install --save date-fns 
+## npm install  @mui/x-date-pickers  
+## npm install @mui/x-date-pickers/DatePicker
