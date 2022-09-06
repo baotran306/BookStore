@@ -1,3 +1,5 @@
+import base64
+
 from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import paypalrestsdk
@@ -28,6 +30,20 @@ def get_list_book():
     return jsonify(list_book)
 
 
+@app.route("/book/get-list-book-type", methods=['GET'])
+def get_list_book_type():
+    list_book_type = book_function.get_list_book_type()
+    print(list_book_type)
+    return jsonify(list_book_type)
+
+
+@app.route("/book/get-list-publisher", methods=['GET'])
+def get_list_publisher():
+    list_publisher = book_function.get_list_publisher()
+    print(list_publisher)
+    return jsonify(list_publisher)
+
+
 @app.route("/book/get-list-new-book", methods=['GET'])
 def get_list_new_book():
     list_book = book_function.get_list_new_book()
@@ -53,11 +69,44 @@ def get_list_book_by_name():
         return jsonify([]), 500
 
 
+@app.route("/book/get-list-book-type-by-name", methods=['POST'])
+def get_list_book_type_by_name():
+    try:
+        book_name = request.json['bookName']
+        list_book = book_function.get_list_book_type_by_name(book_name)
+        return jsonify(list_book)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
+@app.route("/book/get-list-book-by-name-and-is-new", methods=['POST'])
+def get_list_book_by_name_is_new():
+    try:
+        book_name = request.json['bookName']
+        is_new = request.json['is_new']
+        list_book = book_function.get_list_book_by_name_and_is_new(book_name, is_new)
+        return jsonify(list_book)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
 @app.route("/book/get-list-book-by-id/<string:book_id>", methods=['GET'])
 def get_list_book_by_id(book_id):
     try:
         list_book = book_function.get_list_book_by_id(book_id)
         return jsonify(list_book)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
+@app.route("/book/get-list-book-type-by-id/<string:book_type_id>", methods=['GET'])
+def get_list_book_type_by_id(book_type_id):
+    try:
+        list_book_type = book_function.get_list_book_type_by_id(book_type_id)
+        return jsonify(list_book_type)
     except Exception as ex:
         print(ex)
         return jsonify([]), 500
@@ -79,6 +128,55 @@ def insert_book():
                                      book_type_id, publisher_id):
             return jsonify({'result': True, 'message': 'Thêm sách thành công'})
         return jsonify({'result': False, 'message': 'Thêm sách thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/book/insert-book-type", methods=['POST'])
+def insert_book_type():
+    try:
+        book_type_id = request.json['book_type_id']
+        book_type_name = request.json['book_type_name']
+        if book_function.insert_book_type(book_type_id, book_type_name):
+            return jsonify({'result': True, 'message': 'Thêm sách thành công'})
+        return jsonify({'result': False, 'message': 'Thêm sách thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/book/update-book", methods=['POST'])
+def update_book():
+    try:
+        isbn = request.json['isbn']
+        book_name = request.json['book_name']
+        image = request.json['image']
+        pages = request.json['pages']
+        price = request.json['price']
+        release_year = request.json['release_year']
+        quantity = request.json['quantity']
+        book_type_id = request.json['book_type_id']
+        publisher_id = request.json['publisher_id']
+        is_new = request.json['is_new']
+        print(is_new)
+        if book_function.update_book(isbn, book_name, image, pages, price, release_year, quantity, is_new,
+                                     book_type_id, publisher_id):
+            return jsonify({'result': True, 'message': 'Sửa sách thành công'})
+        return jsonify({'result': False, 'message': 'Sửa sách thất bại'}), 502
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
+
+
+@app.route("/book/update-book-type", methods=['POST'])
+def update_book_type():
+    try:
+        book_type_id = request.json['book_type_id']
+        book_type_name = request.json['book_type_name']
+        if book_function.update_book_type(book_type_id, book_type_name):
+            return jsonify({'result': True, 'message': 'Sửa sách thành công'})
+        return jsonify({'result': False, 'message': 'Sửa sách thất bại'}), 502
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
@@ -123,11 +221,41 @@ def get_list_customer_order_detail():
         return jsonify([]), 500
 
 
+@app.route("/staff/get-customer-order-by-status/<int:status_id>", methods=['GET'])
+def get_list_customer_order_detail_by_status(status_id):
+    try:
+        order_customer = staff_function.get_list_customer_order_detail(status_id)
+        return jsonify(order_customer)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
+@app.route("/staff/get-customer-order/<int:cart_id>", methods=['GET'])
+def get_customer_cart_detail_by_cart_id(cart_id):
+    try:
+        order_customer = customer_function.get_customer_cart_detail_by_cart_id(cart_id)
+        return jsonify(order_customer)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
 @app.route("/staff/get-list-count-delivery-staff", methods=['GET'])
 def get_list_count_delivery_staff():
     try:
         staff_count_delivery = staff_function.get_list_count_delivery_staff()
         return jsonify(staff_count_delivery)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
+@app.route("/staff/get-list-order-delivery/<string:staff_id>", methods=['GET'])
+def get_list_order_delivery(staff_id):
+    try:
+        history_order_customer = staff_function.get_list_cart_detail_by_staff_delivery(staff_id)
+        return jsonify(history_order_customer)
     except Exception as ex:
         print(ex)
         return jsonify([]), 500
@@ -167,18 +295,19 @@ def staff_login():
         staff_info = staff_function.staff_login(account, password)
         if len(staff_info) != 0:
             return jsonify({'result': True, 'message': 'Đăng nhập thành công', 'info': staff_info})
-        return jsonify({'result': True, 'message': 'Sai tên đăng nhập hoặc mật khẩu', 'info': []}), 502
+        return jsonify({'result': False, 'message': 'Sai tên đăng nhập hoặc mật khẩu', 'info': []}), 502
     except Exception as ex:
         print(ex)
-        return jsonify({'result': True, 'message': 'Có lỗi xảy ra', 'info': []}), 500
+        return jsonify({'result': False, 'message': 'Có lỗi xảy ra', 'info': []}), 500
 
 
 @app.route("/staff/insert-exchange-rate", methods=['POST'])
 def insert_exchange_rate():
     try:
+        exchange_id = request.json['exchange_id']
         exchange_value = request.json['exchange_value']
         staff_id = request.json['staff_id']
-        if staff_function.insert_exchange_rate(exchange_value, staff_id):
+        if staff_function.insert_exchange_rate(exchange_id, exchange_value, staff_id):
             return jsonify({'result': True, 'message': 'Thêm tỷ giá thành công'}), 200
         return jsonify({'result': False, 'message': 'Thêm tỷ giá thất bại'}), 502
     except Exception as ex:
@@ -186,9 +315,9 @@ def insert_exchange_rate():
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra'}), 500
 
 
-@app.route("/staff/get-newest-exchange", methods=['GET'])
-def get_newest_exchange():
-    newest_exchange = staff_function.get_newest_exchange()
+@app.route("/staff/get-newest-exchange/<string:exchange_id>", methods=['GET'])
+def get_newest_exchange(exchange_id):
+    newest_exchange = staff_function.get_newest_exchange(exchange_id)
     print(newest_exchange)
     return jsonify(newest_exchange)
 
@@ -246,8 +375,9 @@ def statistic_sales_by_month():
     try:
         from_date = request.json['from_date']
         to_date = request.json['to_date']
-        data = staff_function.statistic_sales_by_month(from_date, to_date)
-        return jsonify({'result': True, 'message': 'In thống kê doanh thu thành công', 'info': data}), 200
+        data, sum_all = staff_function.statistic_sales_by_month(from_date, to_date)
+        return jsonify({'result': True, 'message': 'In thống kê doanh thu thành công',
+                        'info': {'stats': data, 'sum_all': sum_all}}), 200
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'message': 'Có lỗi xảy ra', 'info': []}), 500
@@ -330,6 +460,16 @@ def get_customer_info_by_account(account):
         return jsonify([]), 500
 
 
+@app.route("/customer/get-customer-order/<int:cart_id>", methods=['GET'])
+def customer_get_cart_detail_by_cart_id(cart_id):
+    try:
+        order_customer = customer_function.get_customer_cart_detail_by_cart_id(cart_id)
+        return jsonify(order_customer)
+    except Exception as ex:
+        print(ex)
+        return jsonify([]), 500
+
+
 @app.route("/payment", methods=['POST'])
 def payment():
     payment1 = paypalrestsdk.Payment({
@@ -361,6 +501,24 @@ def payment():
 @app.route("/get-image/<string:id_image>", methods=['GET'])
 def get_image(id_image):
     return send_file("D:\\CODE\\PTITHCM_BookStore\\back_end\\Image\\{}".format(id_image), mimetype='image/gif')
+
+
+@app.route("/download-image", methods=['POST'])
+def download_image():
+    try:
+        img = request.json['image']
+        file = request.json['file']
+        print('img', img)
+        print('file', file)
+        base64_str = file.split(',')[1]
+        print(len(file))
+        file_path = "D:\\CODE\\PTITHCM_BookStore\\back_end\\Image\\{}".format(img)
+        with open(file_path, "wb") as fh:
+            fh.write(base64.b64decode(base64_str))
+        return jsonify({"result": True, "message": "Thành công"})
+    except Exception as ex:
+        print(ex)
+        return jsonify({"result": False, "message": "Thất bại"}), 502
 
 
 if __name__ == "__main__":

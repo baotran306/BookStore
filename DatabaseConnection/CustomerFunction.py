@@ -105,7 +105,36 @@ def get_list_cart_detail_by_customer(customer_id):
                 set_info.append(value)
         for info in set_info:
             tmp_list = list(filter(lambda customer_items: customer_items['cart_id'] == info['cart_id'], ls_item))
-            res.append({'receiver_info': info, 'list_item': tmp_list})
+            tmp_sum = sum([x['price'] * x['quantity'] for x in tmp_list])
+            res.append({'receiver_info': info, 'list_item': tmp_list, 'total': tmp_sum})
+        # print(res)
+        return res
+    except Exception as ex:
+        print(ex)
+        return []
+
+
+def get_customer_cart_detail_by_cart_id(cart_id):
+    try:
+        cursor.execute("select * from get_list_customer_cart_detail_by_cart_id(?) order by cart_id desc", cart_id)
+        ls_info = []
+        ls_item = []
+        for r in cursor:
+            ls_info.append({'cart_id': r[0], 'order_cart_time': r[6], 'status_id': r[7], 'status_name': r[8],
+                            'last_name': r[9], 'first_name': r[10],
+                            'address': r[11], 'phone_number': r[12], 'email': r[13]})
+            ls_item.append({'cart_id': r[0], 'isbn': r[1], 'book_name': r[2], 'image': r[3], 'quantity': r[4],
+                            'price': r[5]})
+        cursor.commit()
+        res = []
+        set_info = []
+        for value in ls_info:
+            if value['cart_id'] not in [tmp['cart_id'] for tmp in set_info]:
+                set_info.append(value)
+        for info in set_info:
+            tmp_list = list(filter(lambda customer_items: customer_items['cart_id'] == info['cart_id'], ls_item))
+            tmp_sum = sum([x['price'] * x['quantity'] for x in tmp_list])
+            res.append({'receiver_info': info, 'list_item': tmp_list, 'total': tmp_sum})
         # print(res)
         return res
     except Exception as ex:

@@ -41,15 +41,15 @@ def insert_department(department_id, department_name):
         return False
 
 
-def insert_exchange_rate(exchange_rate, staff_id):
+def insert_exchange_rate(exchange_id, exchange_rate, staff_id):
     try:
         sql = """
             SET NOCOUNT ON;
             DECLARE @RC int;
-            exec @RC = InsertExchangeRate ?, ?;
+            exec @RC = InsertExchangeRate ?, ?, ?;
             SELECT @RC AS rc;
         """
-        values = (exchange_rate, staff_id)
+        values = (exchange_id, exchange_rate, staff_id)
         cursor.execute(sql, values)
         cursor.commit()
         return True
@@ -58,12 +58,12 @@ def insert_exchange_rate(exchange_rate, staff_id):
         return False
 
 
-def get_newest_exchange():
+def get_newest_exchange(exchange_id):
     try:
-        cursor.execute("select * from get_newest_exchange()")
+        cursor.execute("select * from get_newest_exchange(?)", exchange_id)
         ans = []
         for r in cursor:
-            ans.append({'exchange_id': r[0], 'exchange_date_update': r[1], 'exchange_value': r[2],
+            ans.append({'exchange_id': r[0], 'exchange_date_update': r[1], 'exchange_value': float(r[2]),
                         'staff_id_update': r[3], 'first_name': r[4], 'last_name': r[5]})
         cursor.commit()
         return ans
@@ -76,10 +76,12 @@ def statistic_sales_by_month(from_date, to_date):
     try:
         cursor.execute("select * from statistic_sales_by_month(?, ?)", from_date, to_date)
         ans = []
+        sum_all = 0
         for r in cursor:
-            ans.append({'from_date': r[0], 'to_date': r[1]})
+            ans.append({'year_month': r[0], 'total_revenue': r[1]})
+            sum_all += r[1]
         cursor.commit()
-        return ans
+        return ans, sum_all
     except Exception as ex:
         print(ex)
         return []
@@ -158,7 +160,7 @@ def staff_login(account, password):
         cursor.execute("select * from staff_login(?, ?)", account, helper.hash_password(password))
         ans = []
         for r in cursor:
-            ans.append({'customer_id': r[0], 'last_name': r[1], 'first_name': r[2], 'role_id': r[3], 'role_name': r[4]})
+            ans.append({'staff_id': r[0], 'last_name': r[1], 'first_name': r[2], 'role_id': r[3], 'role_name': r[4]})
         cursor.commit()
         return ans
     except Exception as ex:
@@ -193,16 +195,15 @@ def get_list_count_delivery_staff():
         return []
 
 
-def get_list_customer_order_detail():
+def get_list_cart_detail_by_staff_delivery(staff_id):
     try:
-        cursor.execute("select * from get_list_customer_order_detail() order by cart_id desc")
+        cursor.execute("select * from get_list_cart_detail_by_staff_delivery(?) order by cart_id desc", staff_id)
         ls_info = []
         ls_item = []
         for r in cursor:
-            ls_info.append({'cart_id': r[0], 'customer_id': r[6], 'last_name_customer': r[7],
-                            'first_name_customer': r[8], 'order_cart_time': r[9], 'status_id': r[10],
-                            'status_name': r[11], 'last_name_receiver': r[12], 'first_name_receiver': r[13],
-                            'address_receiver': r[14], 'phone_number_receiver': r[15], 'email_receiver': r[16]})
+            ls_info.append({'cart_id': r[0], 'order_cart_time': r[6], 'status_id': r[7], 'status_name': r[8],
+                            'last_name': r[9], 'first_name': r[10],
+                            'address': r[11], 'phone_number': r[12], 'email': r[13]})
             ls_item.append({'cart_id': r[0], 'isbn': r[1], 'book_name': r[2], 'image': r[3], 'quantity': r[4],
                             'price': r[5]})
         cursor.commit()
@@ -213,7 +214,41 @@ def get_list_customer_order_detail():
                 set_info.append(value)
         for info in set_info:
             tmp_list = list(filter(lambda customer_items: customer_items['cart_id'] == info['cart_id'], ls_item))
-            res.append({'receiver_info': info, 'list_item': tmp_list})
+            tmp_sum = sum([x['price'] * x['quantity'] for x in tmp_list])
+            res.append({'receiver_info': info, 'list_item': tmp_list, 'total': tmp_sum})
+        # print(res)
+        return res
+    except Exception as ex:
+        print(ex)
+        return []
+
+
+def get_list_customer_order_detail(status_id=0):
+    try:
+        if status_id == 0:
+            cursor.execute("select * from get_list_customer_order_detail() order by cart_id desc")
+        else:
+            cursor.execute("select * from get_list_customer_order_detail_by_status(?) order by cart_id desc", status_id)
+        ls_info = []
+        ls_item = []
+        for r in cursor:
+            ls_info.append({'cart_id': r[0], 'customer_id': r[6], 'last_name_customer': r[7],
+                            'first_name_customer': r[8], 'order_cart_time': r[9], 'status_id': r[10],
+                            'status_name': r[11], 'last_name_receiver': r[12], 'first_name_receiver': r[13],
+                            'address_receiver': r[14], 'phone_number_receiver': r[15], 'email_receiver': r[16],
+                            'staff_id_delivery': r[17], 'staff_last_name': r[18], 'staff_first_name': r[19]})
+            ls_item.append({'cart_id': r[0], 'isbn': r[1], 'book_name': r[2], 'image': r[3], 'quantity': r[4],
+                            'price': r[5]})
+        cursor.commit()
+        res = []
+        set_info = []
+        for value in ls_info:
+            if value['cart_id'] not in [tmp['cart_id'] for tmp in set_info]:
+                set_info.append(value)
+        for info in set_info:
+            tmp_list = list(filter(lambda customer_items: customer_items['cart_id'] == info['cart_id'], ls_item))
+            tmp_sum = sum([x['price'] * x['quantity'] for x in tmp_list])
+            res.append({'receiver_info': info, 'list_item': tmp_list, 'total': tmp_sum})
         # print(res)
         return res
     except Exception as ex:
