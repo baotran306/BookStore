@@ -5,10 +5,30 @@ import './style/ReceiverInfo.css';
 import {
     TextField
     , Button
+    , FormControl
+    , FormHelperText
+
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ReceiverInfo = () => {
+    const initialError = {
+        first_name: false,
+        last_name: false,
+        address: false,
+        phone_number: false,
+        mail: false
+    }
+    const initialMessageError = {
+        first_name: '',
+        last_name: '',
+        address: '',
+        phone_number: '',
+        mail: ''
+    }
+    const [error, setError] = useState(initialError);
+    const [messageError, setMessageError] = useState(initialMessageError);
+
     const receiver = { first_name: '', last_name: '', address: '', phone_number: '', email: '' };
     const [customer, setCustomerInfo] = useState(receiver);
     const location = useLocation();
@@ -32,8 +52,54 @@ const ReceiverInfo = () => {
         setCustomerInfo({ ...customer, [event.target.name]: event.target.value })
     }
     const handleSave = () => {
-        localStorage.setItem('receiver', JSON.stringify(customer));
-        navigate('/cart');
+        if (!valid()) {
+            localStorage.setItem('receiver', JSON.stringify(customer));
+            navigate('/cart');
+        }
+    }
+    const valid = () => {
+        let flag = false;
+        let error = initialError;
+        let messageError = initialMessageError;
+
+        if (customer.first_name === undefined || customer.first_name === '') {
+            error.first_name = true;
+            messageError.first_name = 'Chưa nhập tên';
+            flag = true;
+        } else {
+            error.first_name = false;
+            messageError.first_name = '';
+        }
+
+        if (customer.last_name === undefined || customer.last_name === '') {
+            error.last_name = true;
+            messageError.last_name = 'Chưa nhập họ';
+            flag = true;
+        } else {
+            error.last_name = false;
+            messageError.last_name = '';
+        }
+
+        if (customer.phone_number === undefined || customer.phone_number === '') {
+            error.phone_number = true;
+            messageError.phone_number = 'Chưa nhập số điện thoại';
+            flag = true;
+        } else {
+            error.phone_number = false;
+            messageError.phone_number = '';
+        }
+
+        if (customer.address === undefined || customer.address === '') {
+            error.address = true;
+            messageError.address = 'Chưa nhập địa chỉ';
+            flag = true;
+        } else {
+            error.address = false;
+            messageError.address = '';
+        }
+        setError(error);
+        setMessageError(messageError);
+        return flag;
     }
     return (
         <Container>
@@ -48,43 +114,51 @@ const ReceiverInfo = () => {
                     <div className="main">
                         <div className="left">
                             <div className="container-input">
-                                <div className="bottom">
-                                    <TextField label={'Họ người nhận*'} className={'form-control'}
-                                        name={"last_name"}
-                                        value={`${customer.last_name}`}
-                                        onChange={handleChange} />
-                                </div>
+                                <TextField label={'Họ người nhận*'} className={'form-control'}
+                                    name={"last_name"}
+                                    value={`${customer.last_name}`}
+                                    error={error.last_name}
+                                    onChange={handleChange} />
+                                {error.last_name && <FormControl error variant="standard">
+                                    <FormHelperText id="component-error-text">{messageError.last_name}</FormHelperText>
+                                </FormControl>}
+                            </div>
+                            <div className="container-input">
+                                <TextField label={'Tên người nhận*'}
+                                    className={'form-control'}
+                                    name={"first_name"}
+                                    onChange={handleChange}
+                                    error={error.first_name}
+                                    value={`${customer.first_name}`} />
+                                {error.first_name && <FormControl error variant="standard">
+                                    <FormHelperText id="component-error-text">{messageError.first_name}</FormHelperText>
+                                </FormControl>}
+                            </div>
+                            <div className="container-input">
+                                <TextField label={'Địa chỉ người nhận*'}
+                                    onChange={handleChange}
+                                    name={"address"}
+                                    className={'form-control'}
+                                    error={error.address}
+                                    value={`${customer.address}`} />
+                                {error.address && <FormControl error variant="standard">
+                                    <FormHelperText id="component-error-text">{messageError.address}</FormHelperText>
+                                </FormControl>}
+                            </div>
+                            <div className="container-input">
+                                <TextField label={'Số điện thoại người nhận*'}
+                                    className={'form-control'}
+                                    name={"phone_number"}
+                                    onChange={handleChange}
+                                    error={error.phone_number}
+                                    value={`${customer.phone_number}`} />
+                                {error.phone_number && <FormControl error variant="standard">
+                                    <FormHelperText id="component-error-text">{messageError.phone_number}</FormHelperText>
+                                </FormControl>}
                             </div>
                             <div className="container-input">
                                 <div className="bottom">
-                                    <TextField label={'Tên người nhận*'}
-                                        className={'form-control'}
-                                        name={"first_name"}
-                                        onChange={handleChange}
-                                        value={`${customer.first_name}`} />
-                                </div>
-                            </div>
-                            <div className="container-input">
-                                <div className="bottom">
-                                    <TextField label={'Địa chỉ người nhận*'}
-                                        onChange={handleChange}
-                                        name={"address"}
-                                        className={'form-control'}
-                                        value={`${customer.address}`} />
-                                </div>
-                            </div>
-                            <div className="container-input">
-                                <div className="bottom">
-                                    <TextField label={'Số điện thoại người nhận*'}
-                                        className={'form-control'}
-                                        name={"phone_number"}
-                                        onChange={handleChange}
-                                        value={`${customer.phone_number}`} />
-                                </div>
-                            </div>
-                            <div className="container-input">
-                                <div className="bottom">
-                                    <TextField label={'Email người nhận *'}
+                                    <TextField label={'Email người nhận '}
                                         onChange={handleChange}
                                         className={'form-control'}
                                         name={"email"}
